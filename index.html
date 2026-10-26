@@ -40,7 +40,7 @@ a{color:inherit}
 
 /* hero */
 .hero{position:relative;padding-block:56px 88px}
-.hero::before{content:"";position:absolute;inset:0 -50vw;background:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 1.4px) 0 0/26px 26px;opacity:.7;mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);z-index:0;pointer-events:none}
+.hero::before{content:"";position:absolute;inset:0 calc(50% - 50vw);background:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 1.4px) 0 0/26px 26px;opacity:.7;mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);z-index:0;pointer-events:none}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
 .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-2);margin:0 0 20px;display:flex;align-items:center;gap:10px}
 .kicker::before{content:"";width:28px;height:2px;background:var(--saffron)}
