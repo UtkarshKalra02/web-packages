@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utkarsh Web Packages</title>
+<meta name="description" content="Search-optimised websites for Indian businesses. Packages from ₹21,000, delivered in 14 to 30 days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: editorial single column. Hero pairs a headline with a live search-result mock; packages sit on a deep teal band; process runs as a horizontal route. */
+:root{
+  --paper:#f2f5f2; --card:#ffffff; --ink:#0c2a2b; --muted:#53686a; --line:#d4dcd8;
+  --teal:#0b3b3c; --teal-2:#115052; --on-teal:#e8f3f0; --on-teal-muted:#9cbdb8;
+  --saffron:#f4a622; --saffron-ink:#2a1a00; --soft:#e5eeea;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#08171a; --card:#0f2427; --ink:#e6f1ee; --muted:#93aaa8; --line:#1f3a3c;
+  --teal:#0d3335; --teal-2:#134446; --soft:#10292b; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:3px}
+
+/* header */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:12px;height:12px;background:var(--saffron);border-radius:50%;display:inline-block}
+.bar nav{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:500}
+.bar nav a{text-decoration:none;color:var(--muted)}
+.bar nav a:hover{color:var(--ink)}
+.pill{background:var(--teal);color:var(--on-teal)!important;padding:10px 18px;border-radius:999px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{position:relative;padding-block:56px 88px}
+.hero::before{content:"";position:absolute;inset:0 -50vw;background:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 1.4px) 0 0/26px 26px;opacity:.7;mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);z-index:0;pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-2);margin:0 0 20px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:28px;height:2px;background:var(--saffron)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,7.2vw,88px);line-height:.98;letter-spacing:-.035em;margin:0 0 24px;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(transparent 64%,var(--saffron) 64% 92%,transparent 92%);padding-inline:2px}
+.sub{font-size:19px;color:var(--muted);max-width:50ch;margin:0 0 32px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--teal);font-family:var(--body);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--teal);color:var(--on-teal)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.sun{background:var(--saffron);border-color:var(--saffron);color:var(--saffron-ink)}
+.btn.sun:hover{box-shadow:0 10px 24px -10px rgba(244,166,34,.7)}
+.proof{display:flex;flex-wrap:wrap;gap:12px 36px;margin:0;padding:0;list-style:none}
+.proof li{display:flex;flex-direction:column}
+.proof b{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.proof span{font-size:14px;color:var(--muted)}
+
+/* search mock */
+.serp{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 30px 60px -30px rgba(11,59,60,.35),0 2px 0 var(--line)}
+.search{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:999px;padding:11px 18px;font-size:15px;color:var(--ink);background:var(--paper)}
+.search svg{flex:none}
+.search span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res{margin-top:14px;display:grid;gap:10px}
+.r{border-radius:12px;padding:14px 16px;border:1px solid transparent;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:start}
+.r.dim{opacity:.45}
+.r .rank{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:2px;grid-row:span 3}
+.r .url{font-family:var(--mono);font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.r .t{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--teal-2)}
+.r .d{font-size:14px;color:var(--muted);line-height:1.45}
+.r.you{background:var(--soft);border-color:var(--teal-2);position:relative}
+.r.you .rank{color:var(--saffron-ink);background:var(--saffron);border-radius:8px;padding:3px 8px;font-weight:500;min-width:36px;text-align:center}
+.stars{color:var(--saffron);letter-spacing:2px;font-size:13px}
+.note{font-size:12px;color:var(--muted);margin:14px 4px 0;font-family:var(--mono)}
+
+/* sections */
+section{padding-block:88px}
+.head{max-width:720px;margin-bottom:48px}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.6vw,54px);line-height:1.03;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance}
+.head p{color:var(--muted);font-size:18px;margin:0}
+
+/* packages band */
+.band{background:var(--teal);color:var(--on-teal);position:relative}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 85% 0%,rgba(244,166,34,.12),transparent 70%);pointer-events:none}
+.band .wrap{position:relative;z-index:1}
+.band .kicker{color:var(--saffron)}
+.band .head p{color:var(--on-teal-muted)}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{background:var(--teal-2);border:1px solid rgba(232,243,240,.14);border-radius:24px;padding:34px 28px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.plan.feat{background:var(--paper);color:var(--ink);border-color:var(--saffron);transform:translateY(-14px);box-shadow:0 40px 60px -30px rgba(0,0,0,.5)}
+.badge{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;min-height:20px;color:var(--on-teal-muted)}
+.plan.feat .badge{color:var(--saffron-ink);background:var(--saffron);align-self:flex-start;padding:3px 10px;border-radius:999px;font-weight:500}
+.plan h3{font-family:var(--display);font-size:30px;font-weight:700;letter-spacing:-.02em;margin:0}
+.price{font-family:var(--display);font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:14px;font-weight:500;letter-spacing:0;opacity:.65;margin-left:6px}
+.fit{margin:0;font-size:15px;opacity:.8}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:11px;font-size:15.5px}
+.plan li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px}
+.plan li::before{content:"";width:9px;height:5px;border-left:2px solid var(--saffron);border-bottom:2px solid var(--saffron);transform:rotate(-45deg);margin-top:7px;margin-left:3px}
+.plan.feat li::before{border-color:var(--teal-2)}
+.plan .foot{margin-top:auto;padding-top:18px;border-top:1px solid rgba(232,243,240,.18);display:flex;justify-content:space-between;gap:12px;font-size:14px;flex-wrap:wrap}
+.plan.feat .foot{border-color:var(--line)}
+.plan .foot b{font-weight:600}
+.pbtn{display:block;text-align:center;padding:13px 18px;border-radius:999px;font-weight:600;text-decoration:none;font-size:15px;border:2px solid rgba(232,243,240,.5);color:var(--on-teal)}
+.plan.feat .pbtn{background:var(--teal);border-color:var(--teal);color:var(--on-teal)}
+.pbtn:hover{border-color:var(--saffron)}
+
+/* compare */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:680px;font-size:16px}
+th,td{padding:15px 22px;text-align:left;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--display);font-size:19px;font-weight:700;background:var(--soft)}
+thead th:nth-child(3){background:var(--saffron);color:var(--saffron-ink)}
+tbody th{font-weight:500;color:var(--muted);width:28%}
+tbody tr:last-child>*{border-bottom:0}
+td{font-variant-numeric:tabular-nums}
+
+/* monthly */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 30px;display:grid;gap:14px;min-width:0}
+.mcard h3{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:-.02em;margin:0}
+.mcard .price{font-size:44px;color:var(--teal-2)}
+.mcard ul{margin:0;padding-left:20px;display:grid;gap:7px;color:var(--muted)}
+.mcard ul li::marker{color:var(--saffron)}
+
+/* process */
+.route{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.route::before{content:"";position:absolute;left:22px;right:22px;top:21px;height:2px;background:repeating-linear-gradient(90deg,var(--teal-2) 0 8px,transparent 8px 16px);opacity:.5}
+.route li{position:relative;min-width:0}
+.node{width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--on-teal);display:grid;place-items:center;font-family:var(--mono);font-size:15px;position:relative;z-index:1;margin-bottom:18px;box-shadow:0 0 0 6px var(--paper)}
+.route b{display:block;font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.route span{color:var(--muted);font-size:15.5px;display:block}
+
+/* terms */
+.terms{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}
+.terms ul{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.terms li{padding:16px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:16px}
+
+/* contact */
+.contact{background:var(--teal);color:var(--on-teal);border-radius:32px;padding:64px 48px;margin-bottom:64px;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:var(--saffron);opacity:.14}
+.contact>*{position:relative}
+.contact h2{margin-bottom:14px}
+.contact p{color:var(--on-teal-muted);max-width:52ch;margin:0 0 28px;font-size:18px}
+.num{font-family:var(--display);font-weight:800;font-size:clamp(34px,6.2vw,72px);letter-spacing:-.035em;line-height:1;margin-bottom:30px;font-variant-numeric:tabular-nums}
+.contact .btn.ghost{color:var(--on-teal);border-color:rgba(232,243,240,.5)}
+
+footer{padding-bottom:48px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* motion */
+.serp{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:.0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.serp{animation:none}html{scroll-behavior:auto}.btn{transition:none}}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:44px}
+  .plans{grid-template-columns:minmax(0,1fr);max-width:560px}
+  .plan.feat{transform:none}
+  .route{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}.route::before{display:none}
+  .terms{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .bar nav a:not(.pill){display:none}
+  .hero{padding-block:32px 56px}
+  section{padding-block:60px}
+  .duo{grid-template-columns:minmax(0,1fr)}
+  .route{grid-template-columns:minmax(0,1fr)}
+  .contact{padding:40px 24px;border-radius:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="logo" href="#top"><i></i>Utkarsh</a>
+    <nav>
+      <a href="#packages">Packages</a>
+      <a href="#compare">Compare</a>
+      <a href="#process">Process</a>
+      <a href="#terms">Terms</a>
+      <a class="pill" href="tel:+919891958552">+91 98919 58552</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">Websites &amp; Google visibility</p>
+          <h1>Be the first name they <em>find.</em></h1>
+          <p class="sub">I build fast, search-optimised websites for businesses, so customers who search for what you sell land on you, and their enquiry reaches you on WhatsApp, phone or form.</p>
+          <div class="cta">
+            <a class="btn solid" href="#packages">See packages</a>
+            <a class="btn ghost" href="https://wa.me/919891958552" target="_blank" rel="noopener">Message on WhatsApp</a>
+          </div>
+          <ul class="proof">
+            <li><b>5+</b><span>businesses with websites built</span></li>
+            <li><b>14 days</b><span>fastest delivery</span></li>
+            <li><b>&#8377;21,000</b><span>packages start at</span></li>
+          </ul>
+        </div>
+
+        <aside aria-label="Illustration of a Google search result">
+          <div class="serp">
+            <div class="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span>your service + your city</span>
+            </div>
+            <div class="res">
+              <div class="r you">
+                <div class="rank" id="rank">#1</div>
+                <div class="url">www.yourbusiness.in</div>
+                <div class="t">Your Business | Trusted in Your City</div>
+                <div class="d"><span class="stars">★★★★★</span> Fast, mobile-ready website. Call or WhatsApp directly from the page.</div>
+              </div>
+              <div class="r dim">
+                <div class="rank">#2</div>
+                <div class="url">www.competitor-one.in</div>
+                <div class="t">Competitor One</div>
+                <div class="d">Slow site, hard to use on a phone.</div>
+              </div>
+              <div class="r dim">
+                <div class="rank">#3</div>
+                <div class="url">www.competitor-two.in</div>
+                <div class="t">Competitor Two</div>
+                <div class="d">No clear way to contact them.</div>
+              </div>
+            </div>
+            <p class="note">Illustration only. Rankings are not guaranteed.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</div>
+
+<section class="band" id="packages">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Website packages</p>
+      <h2>Three ways to get online and get found.</h2>
+      <p>One-time project fee. Domain and hosting for the first year are included in every package.</p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <div class="badge">Essentials</div>
+        <h3>Starter</h3>
+        <div class="price">&#8377;21,000</div>
+        <p class="fit">For service businesses that need a credible, searchable online presence.</p>
+        <ul>
+          <li>Up to 5 pages</li>
+          <li>Keyword research for 10 keywords</li>
+          <li>On-page SEO: titles, meta, headings, schema</li>
+          <li>Mobile-first, speed-optimised build</li>
+          <li>Basic Google Business Profile setup</li>
+          <li>Search Console and Analytics</li>
+          <li>WhatsApp, call and form enquiry capture</li>
+          <li>2 rounds of revisions</li>
+        </ul>
+        <div class="foot"><span><b>14 days</b> delivery</span><span><b>1 month</b> support</span></div>
+        <a class="pbtn" href="https://wa.me/919891958552?text=Hi%20Utkarsh%2C%20I%20am%20interested%20in%20the%20Starter%20package." target="_blank" rel="noopener">Enquire about Starter</a>
+      </article>
+
+      <article class="plan feat">
+        <div class="badge">Recommended</div>
+        <h3>Growth</h3>
+        <div class="price">&#8377;35,000</div>
+        <p class="fit">For SMEs that want a steady flow of leads from Google.</p>
+        <ul>
+          <li>Up to 10 pages</li>
+          <li>Keyword research for 25 keywords</li>
+          <li>On-page SEO: titles, meta, headings, schema</li>
+          <li>Mobile-first, speed-optimised build</li>
+          <li>Full Google Business Profile setup and optimisation</li>
+          <li>3 SEO blog posts at launch</li>
+          <li>Up to 3 location pages</li>
+          <li>Search Console and Analytics</li>
+          <li>WhatsApp, call and form enquiry capture</li>
+          <li>3 rounds of revisions</li>
+        </ul>
+        <div class="foot"><span><b>21 days</b> delivery</span><span><b>3 months</b> support</span></div>
+        <a class="pbtn" href="https://wa.me/919891958552?text=Hi%20Utkarsh%2C%20I%20am%20interested%20in%20the%20Growth%20package." target="_blank" rel="noopener">Enquire about Growth</a>
+      </article>
+
+      <article class="plan">
+        <div class="badge">Comprehensive</div>
+        <h3>Premium</h3>
+        <div class="price">&#8377;55,000</div>
+        <p class="fit">For businesses with large catalogues or competitive markets.</p>
+        <ul>
+          <li>Up to 20 pages plus product or catalogue section</li>
+          <li>Keyword research for 50 keywords with competitor analysis</li>
+          <li>On-page SEO: titles, meta, headings, schema</li>
+          <li>Mobile-first, speed-optimised build</li>
+          <li>Full Google Business Profile setup and optimisation</li>
+          <li>6 SEO blog posts at launch</li>
+          <li>Up to 8 location pages</li>
+          <li>Search Console and Analytics, monthly report for 3 months</li>
+          <li>Enquiry capture with leads logged to a Google Sheet</li>
+          <li>5 rounds of revisions</li>
+        </ul>
+        <div class="foot"><span><b>30 days</b> delivery</span><span><b>6 months</b> support</span></div>
+        <a class="pbtn" href="https://wa.me/919891958552?text=Hi%20Utkarsh%2C%20I%20am%20interested%20in%20the%20Premium%20package." target="_blank" rel="noopener">Enquire about Premium</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section id="compare">
+    <div class="head">
+      <p class="kicker">Side by side</p>
+      <h2>Compare the packages.</h2>
+      <p>Every package includes on-page SEO, a mobile-first build and enquiry capture.</p>
+    </div>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th></th><th>Starter</th><th>Growth</th><th>Premium</th></tr></thead>
+        <tbody>
+          <tr><th>Price</th><td>&#8377;21,000</td><td>&#8377;35,000</td><td>&#8377;55,000</td></tr>
+          <tr><th>Pages</th><td>Up to 5</td><td>Up to 10</td><td>Up to 20 + catalogue</td></tr>
+          <tr><th>Keyword research</th><td>10 keywords</td><td>25 keywords</td><td>50 + competitor analysis</td></tr>
+          <tr><th>Google Business Profile</th><td>Basic setup</td><td>Full setup + optimisation</td><td>Full setup + optimisation</td></tr>
+          <tr><th>SEO blog posts at launch</th><td>&mdash;</td><td>3</td><td>6</td></tr>
+          <tr><th>Location pages</th><td>&mdash;</td><td>Up to 3</td><td>Up to 8</td></tr>
+          <tr><th>Reporting</th><td>Search Console + Analytics</td><td>Search Console + Analytics</td><td>Monthly report, 3 months</td></tr>
+          <tr><th>Lead capture</th><td>WhatsApp, call, form</td><td>WhatsApp, call, form</td><td>Plus Google Sheet log</td></tr>
+          <tr><th>Revision rounds</th><td>2</td><td>3</td><td>5</td></tr>
+          <tr><th>Delivery</th><td>14 days</td><td>21 days</td><td>30 days</td></tr>
+          <tr><th>Free support after launch</th><td>1 month</td><td>3 months</td><td>6 months</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="monthly" style="padding-top:0">
+    <div class="head">
+      <p class="kicker">After launch</p>
+      <h2>Keep climbing, month after month.</h2>
+      <p>A website holds its search visibility only when it is looked after. Add either plan after launch.</p>
+    </div>
+    <div class="duo">
+      <div class="mcard">
+        <h3>SEO Growth</h3>
+        <div class="price">&#8377;10,000<small>/ month</small></div>
+        <ul>
+          <li>4 SEO blog posts every month</li>
+          <li>Weekly Google Business Profile posts</li>
+          <li>Monthly ranking and enquiry report</li>
+          <li>On-page fixes and improvements</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <h3>Maintenance</h3>
+        <div class="price">&#8377;2,500<small>/ month</small></div>
+        <ul>
+          <li>Software and plugin updates</li>
+          <li>Regular backups</li>
+          <li>Uptime monitoring</li>
+          <li>Small content changes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="padding-top:0">
+    <div class="head">
+      <p class="kicker">How it works</p>
+      <h2>From first call to live website.</h2>
+      <p>The delivery period begins once your content and logo have been received.</p>
+    </div>
+    <ol class="route">
+      <li><div class="node">1</div><b>Discovery</b><span>A short call to understand your business, your customers and the searches that matter.</span></li>
+      <li><div class="node">2</div><b>Proposal and advance</b><span>You confirm the package and pay 50% to begin.</span></li>
+      <li><div class="node">3</div><b>Build and review</b><span>Design, content and SEO setup, with revision rounds as per your package.</span></li>
+      <li><div class="node">4</div><b>Launch</b><span>The final 50% is paid before go-live. Search Console, Analytics and enquiry capture are switched on.</span></li>
+    </ol>
+  </section>
+
+  <section id="terms" style="padding-top:0">
+    <div class="terms">
+      <div class="head" style="margin:0">
+        <p class="kicker">Terms</p>
+        <h2>Clear terms, no surprises.</h2>
+      </div>
+      <ul>
+        <li>Payment is 50% in advance and 50% before the website goes live.</li>
+        <li>The client provides the logo, photographs and business details. Delivery timelines start when these are received.</li>
+        <li>Domain and hosting are included for the first year and renew at actual cost from the second year.</li>
+        <li>Prices are quoted before applicable taxes.</li>
+        <li>Paid advertising, professional photography and copywriting beyond the listed pages are quoted separately.</li>
+        <li>Search rankings depend on competition and on Google's own systems, so specific rankings or lead numbers are not guaranteed.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="contact" id="contact">
+    <p class="kicker" style="color:var(--saffron)">Let's talk</p>
+    <h2>Discuss your website.</h2>
+    <p>Call or message to find out which package suits your business. A written proposal follows after a short discovery call.</p>
+    <div class="num">+91 98919 58552</div>
+    <div class="cta" style="margin:0">
+      <a class="btn sun" href="https://wa.me/919891958552" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a class="btn ghost" href="tel:+919891958552">Call Utkarsh</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Utkarsh &middot; Websites &amp; Google visibility</span>
+    <span>All prices in Indian Rupees (&#8377;)</span>
+  </footer>
+</div>
+
+<script>
+/* One orchestrated moment: the rank badge in the mock climbs to #1 on load.
+   The markup already reads #1, so the page is complete without this script. */
+(function(){
+  var el=document.getElementById('rank');
+  if(!el||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var n=8;
+  el.textContent='#'+n;
+  var t=setInterval(function(){
+    n--; el.textContent='#'+n;
+    if(n<=1){clearInterval(t)}
+  },160);
+})();
+</script>
+</body>
+</html>
