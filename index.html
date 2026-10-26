@@ -24,7 +24,7 @@
   --teal:#0d3335; --teal-2:#134446; --soft:#10292b; color-scheme:dark}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1140px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--saffron);outline-offset:3px}
@@ -134,6 +134,14 @@ td{font-variant-numeric:tabular-nums}
 .route b{display:block;font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
 .route span{color:var(--muted);font-size:15.5px;display:block}
 
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:56px;align-items:center}
+.portrait{width:220px;height:220px;border-radius:50%;overflow:hidden;background:#fff;border:6px solid var(--card);box-shadow:0 0 0 2px var(--saffron),0 24px 50px -24px rgba(11,59,60,.5);justify-self:center}
+.portrait img{width:100%;height:100%;display:block;object-fit:cover}
+.about p{color:var(--muted);font-size:18px;max-width:62ch;margin:0 0 16px}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0;padding:0}
+.chips li{font-size:14px;border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:999px}
+
 /* terms */
 .terms{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}
 .terms ul{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
@@ -161,6 +169,7 @@ footer{padding-bottom:48px;color:var(--muted);font-size:14px;display:flex;justif
   .plan.feat{transform:none}
   .route{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}.route::before{display:none}
   .terms{grid-template-columns:minmax(0,1fr);gap:28px}
+  .about{grid-template-columns:minmax(0,1fr);gap:32px}
 }
 @media (max-width:640px){
   body{font-size:16px}
@@ -182,6 +191,7 @@ footer{padding-bottom:48px;color:var(--muted);font-size:14px;display:flex;justif
       <a href="#packages">Packages</a>
       <a href="#compare">Compare</a>
       <a href="#process">Process</a>
+      <a href="#about">About</a>
       <a href="#terms">Terms</a>
       <a class="pill" href="tel:+919891958552">+91 98919 58552</a>
     </nav>
@@ -380,6 +390,25 @@ footer{padding-bottom:48px;color:var(--muted);font-size:14px;display:flex;justif
       <li><div class="node">3</div><b>Build and review</b><span>Design, content and SEO setup, with revision rounds as per your package.</span></li>
       <li><div class="node">4</div><b>Launch</b><span>The final 50% is paid before go-live. Search Console, Analytics and enquiry capture are switched on.</span></li>
     </ol>
+  </section>
+
+  <section id="about" style="padding-top:0">
+    <div class="about">
+      <div class="portrait"><img src="data:image/webp;base64,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" width="200" height="200" alt="Illustrated portrait of Utkarsh behind a laptop"></div>
+      <div>
+        <p class="kicker">About</p>
+        <h2>Hi, I'm Utkarsh.</h2>
+        <p>I'm a software developer and entrepreneur based in New Delhi. I hold a B.Tech in Information Technology from Manipal University Jaipur, and I have worked as a software developer on an ESG analytics platform.</p>
+        <p>Alongside client work I run two businesses. I founded Nooré Beauty, a direct-to-consumer skincare brand, and I work in my family's printing and packaging business, JSS The Print Zone, where I rebuilt the internal order-tracking system that six staff now use every day. Order-to-delivery time there came down from 14 days to 9.</p>
+        <p>I build websites the same way I run my own businesses: they have to bring in enquiries, not just look good.</p>
+        <ul class="chips">
+          <li>New Delhi</li>
+          <li>B.Tech, Information Technology</li>
+          <li>AWS Certified Cloud Practitioner</li>
+          <li>Founder, Nooré Beauty</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section id="terms" style="padding-top:0">
